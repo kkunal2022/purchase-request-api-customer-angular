@@ -1,0 +1,222 @@
+<div class="row">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">
+        Add New Product
+      </button>
+      <br /><br />
+      <ng-template #mymodal1 let-modal1>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add New Product</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal1.dismiss('Cross click')"
+          >
+            <span aria-hidden="true" (click)="cancel()">×</span>
+          </button>
+        </div>
+        <div class="center">
+          <form>
+            <div class="row" class="col-md-6">
+              <input
+                type="text"
+                placeholder="Product Name"
+                [(ngModel)]="product.productName"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="row" class="col-md-6">
+              <input
+                type="text"
+                placeholder="Purchase Date"
+                [(ngModel)]="product.purchaseDate"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="row" class="col-md-6">
+              <input
+                type="number"
+                placeholder="Quantity"
+                [(ngModel)]="product.quantity"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="row" class="col-md-6">
+              <input
+                type="text"
+                placeholder="Product Code"
+                [(ngModel)]="product.productCode"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+
+            <div class="row" class="col-md-6">
+              <input
+                type="text"
+                placeholder="Email Address"
+                [(ngModel)]="product.emailAddress"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="row" class="col-md-6">
+              <input
+                type="text"
+                placeholder="File Image"
+                [(ngModel)]="product.profileImage"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+
+            <br />
+
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="createProduct(product)"
+              (click)="modal1.close('Save click')"
+            >
+              Add
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="modal1.close('Save click')"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      </ng-template>
+
+      <div class="row">
+        <div class="card" class="text-center">
+          <table class="table">
+            <thead style="background-color: rgb(192, 183, 183)">
+              <th>ID</th>
+              <th>Product Name</th>
+              <th>Purchase Date</th>
+              <th>Quantity</th>
+              <th>Product Code</th>
+              <th>Email Address</th>
+              <th>File Image</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of listProducts">
+                <td>{{ p.productName }}</td>
+                <td>{{ p.purchaseDate }}</td>
+                <td>{{ p.quantity }}</td>
+                <td>{{ p.productCode }}</td>
+                <td>{{ p.emailAddress }}</td>
+                <td>{{ p.profileImage }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    (click)="open(mymodal)"
+                  >
+                    edit
+                  </button>
+                  <ng-template #mymodal let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+                      <button
+                        type="button"
+                        class="close"
+                        aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"
+                      >
+                        <span aria-hidden="true" (click)="cancel()">×</span>
+                      </button>
+                    </div>
+
+                    <>
+                    <form>
+                      <div class="modal-body">
+                        <div class="row" class="col-md-5">
+                          <label>Product Name</label>
+                          <input
+                            type="text"
+                            [(ngModel)]="p.productName"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
+                        </div>
+                        <div class="row" class="col-md-5">
+                          <label>Purchase Date</label>
+                          <input
+                            type="number"
+                            [(ngModel)]="p.purchaseDate"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
+                        </div>
+                        <div class="row" class="col-md-5">
+                          <label>Quantity</label>
+                          <input
+                            type="number"
+                            [(ngModel)]="p.quantity"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row" class="col-md-5">
+                        <label>Product Code</label>
+                        <input
+                          type="text"
+                          [(ngModel)]="p.productCode"
+                          [ngModelOptions]="{ standalone: true }"
+                        />
+                      </div>
+                      <div class="row" class="col-md-5">
+                        <label>Email Address</label>
+                        <input
+                          type="number"
+                          [(ngModel)]="p.emailAddress"
+                          [ngModelOptions]="{ standalone: true }"
+                        />
+                      </div>
+                      <div class="row" class="col-md-5">
+                        <label>File Image</label>
+                        <input
+                          type="number"
+                          [(ngModel)]="p.profileImage"
+                          [ngModelOptions]="{ standalone: true }"
+                        />
+                      </div>
+
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-info"
+                          (click)="modal.close('Save click')"
+                          (click)="cancel()"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          class="btn btn-success"
+                          (click)="updateProduct(p)"
+                          (click)="modal.close('Save click')"
+                        >
+                          Validate
+                        </button>
+                      </div>
+                    </form>
+                  </ng-template>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    (click)="deleteProduct(p.id)"
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
